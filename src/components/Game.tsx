@@ -4,11 +4,16 @@ import Board from "./Board";
 function Game() {
   const [isPlaying, setPlaying] = useState(false);
   const [isGameOver, setGameOver] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState<number>(2);
+  const [currentPlayer, setCurrentPlayer] = useState<number>(1);
 
   const handlePlayGameClick = useCallback(() => {
     setPlaying(!isPlaying);
   }, [isPlaying]);
+
+  const handleChangeTurn = useCallback(() => {
+    if (currentPlayer == 1) setCurrentPlayer(2);
+    if (currentPlayer == 2) setCurrentPlayer(1);
+  }, [currentPlayer]);
 
   const getGameMessage = useMemo(() => {
     if (!isPlaying) return "";
@@ -21,7 +26,7 @@ function Game() {
     <>
       {isPlaying && (
         <>
-          <Board currentPlayer={currentPlayer} />
+          <Board currentPlayer={currentPlayer} nextTurn={handleChangeTurn} />
           {getGameMessage}
         </>
       )}

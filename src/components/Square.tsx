@@ -2,18 +2,29 @@ import { useCallback, useState } from "react";
 
 type SquareProps = {
   currentPlayer: number;
+  nextTurn: () => void;
 };
 
-const Square: React.FC<SquareProps> = ({ currentPlayer }) => {
+const Square: React.FC<SquareProps> = ({ currentPlayer, nextTurn }) => {
   const [value, setValue] = useState(0);
   const handleOnClickSquare = useCallback(() => {
     setValue(currentPlayer);
-  }, [currentPlayer]);
+    nextTurn();
+  }, [currentPlayer, nextTurn]);
+
+  const getGamePiece = useCallback((value: number) => {
+    if (value == 1) return "O";
+    if (value == 2) return "X";
+  }, []);
 
   return (
-    <>
-      {value ? String(value) : <button onClick={handleOnClickSquare}>.</button>}
-    </>
+    <div>
+      {value ? (
+        getGamePiece(value)
+      ) : (
+        <button onClick={handleOnClickSquare}>.</button>
+      )}
+    </div>
   );
 };
 
