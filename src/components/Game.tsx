@@ -15,9 +15,13 @@ function Game() {
     if (currentPlayer == 2) setCurrentPlayer(1);
   }, [currentPlayer]);
 
+  const handleWin = useCallback(() => {
+    setGameOver(true);
+  }, []);
+
   const getGameMessage = useMemo(() => {
     if (!isPlaying) return "";
-    if (isGameOver) return "? Wins!";
+    if (isGameOver) return (currentPlayer === 1 ? "X" : "O") + " Wins!";
     if (currentPlayer === 1) return "O's Turn";
     if (currentPlayer === 2) return "X's Turn";
   }, [currentPlayer, isGameOver, isPlaying]);
@@ -26,7 +30,11 @@ function Game() {
     <>
       {isPlaying && (
         <>
-          <Board currentPlayer={currentPlayer} nextTurn={handleChangeTurn} />
+          <Board
+            currentPlayer={currentPlayer}
+            nextTurn={handleChangeTurn}
+            handleWin={handleWin}
+          />
           {getGameMessage}
         </>
       )}

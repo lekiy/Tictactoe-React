@@ -5,33 +5,38 @@ import { useCallback, useState } from "react";
 type BoardProps = {
   currentPlayer: number;
   nextTurn: () => void;
+  handleWin: () => void;
 };
 
-const Board: React.FC<BoardProps> = ({ currentPlayer, nextTurn }) => {
+const Board: React.FC<BoardProps> = ({
+  currentPlayer,
+  nextTurn,
+  handleWin,
+}) => {
   const [gridCells, setGridCells] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const squares = [];
 
   const checkForWin = useCallback(
-    (currentPlayer: number) => {
-      console.log(currentPlayer);
-      if ((gridCells[0] + gridCells[1] + gridCells[2]) / 3 === currentPlayer)
-        return true;
+    (currentPlayer: number, grid: Array<number>) => {
+      if ((grid[0] + grid[1] + grid[2]) / 3 === currentPlayer) return true;
       return false;
     },
-    [gridCells]
+    []
   );
 
   const handleUpdateCell = useCallback(
-    (position: number, value: number) => {
-      setGridCells(
-        gridCells.map((cell, index) => {
-          if (index === position) return value;
-          return cell;
-        })
-      );
-      console.log(checkForWin(value));
+    (position: number, player: number) => {
+      let grid = gridCells;
+      grid = grid.map((cell, index) => {
+        if (index === position) {
+          return player;
+        }
+        return cell;
+      });
+      setGridCells(grid);
+      if (checkForWin(player, grid)) handleWin();
     },
-    [checkForWin, gridCells]
+    [checkForWin, gridCells, handleWin]
   );
 
   for (let index = 0; index < gridCells.length; index++) {
