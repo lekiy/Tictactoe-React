@@ -20,17 +20,24 @@ const Square: React.FC<SquareProps> = ({
     nextTurn();
   }, [currentPlayer, nextTurn, position, updateCell]);
 
-  const getGamePiece = useCallback(
-    (value: number) => {
-      if (value == 1) return "O";
-      if (value == 2) return "X";
-      if (value == 0) return String(position);
-    },
-    [position]
-  );
+  const getGamePiece = useCallback((value: number) => {
+    if (value == 1)
+      return (
+        <div className="o">
+          <div></div>
+        </div>
+      );
+    if (value == 2)
+      return (
+        <div className="x">
+          <div></div>
+          <div></div>
+        </div>
+      );
+  }, []);
 
   return (
-    <div>
+    <div className="square">
       {value ? (
         getGamePiece(value)
       ) : (

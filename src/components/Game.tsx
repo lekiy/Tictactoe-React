@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import Board from "./Board";
+import "./Game.css";
 
 function Game() {
   const [isPlaying, setPlaying] = useState(false);

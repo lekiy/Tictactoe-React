@@ -1,5 +1,4 @@
 import Square from "./Square";
-import "./Board.css";
 import { useCallback, useState } from "react";
 
 type BoardProps = {
@@ -50,12 +49,7 @@ const Board: React.FC<BoardProps> = ({
     );
   }
 
-  return (
-    <div className="board">
-      {squares}
-      {gridCells}
-    </div>
-  );
+  return <div className="board">{squares}</div>;
 };
 
 export default Board;
