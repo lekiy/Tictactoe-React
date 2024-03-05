@@ -17,7 +17,60 @@ const Board: React.FC<BoardProps> = ({
 
   const checkForWin = useCallback(
     (currentPlayer: number, grid: Array<number>) => {
-      if ((grid[0] + grid[1] + grid[2]) / 3 === currentPlayer) return true;
+      //horizontal
+      if (
+        grid[0] === currentPlayer &&
+        grid[1] === currentPlayer &&
+        grid[2] === currentPlayer
+      )
+        return true; //top
+      if (
+        grid[3] === currentPlayer &&
+        grid[4] === currentPlayer &&
+        grid[5] === currentPlayer
+      )
+        return true; //middle
+      if (
+        grid[6] === currentPlayer &&
+        grid[7] === currentPlayer &&
+        grid[8] === currentPlayer
+      )
+        return true; //bottom
+
+      //vertical
+      if (
+        grid[0] === currentPlayer &&
+        grid[3] === currentPlayer &&
+        grid[6] === currentPlayer
+      )
+        return true; //left
+      if (
+        grid[1] === currentPlayer &&
+        grid[4] === currentPlayer &&
+        grid[7] === currentPlayer
+      )
+        return true; //middle
+      if (
+        grid[2] === currentPlayer &&
+        grid[5] === currentPlayer &&
+        grid[8] === currentPlayer
+      )
+        return true; //right
+
+      //diagnal
+      if (
+        grid[0] === currentPlayer &&
+        grid[4] === currentPlayer &&
+        grid[8] === currentPlayer
+      )
+        return true; //left-right
+      if (
+        grid[2] === currentPlayer &&
+        grid[4] === currentPlayer &&
+        grid[6] === currentPlayer
+      )
+        return true; //right-left
+
       return false;
     },
     []
@@ -33,6 +86,7 @@ const Board: React.FC<BoardProps> = ({
         return cell;
       });
       setGridCells(grid);
+      console.log(grid);
       if (checkForWin(player, grid)) handleWin();
     },
     [checkForWin, gridCells, handleWin]
@@ -49,7 +103,21 @@ const Board: React.FC<BoardProps> = ({
     );
   }
 
-  return <div className="board">{squares}</div>;
+  return (
+    <>
+      <div className="board">{squares}</div>
+      <div className="lines">
+        <div className="line-top"></div>
+        <div className="line-middle"></div>
+        <div className="line-bottom"></div>
+        <div className="line-left"></div>
+        <div className="line-center"></div>
+        <div className="line-right"></div>
+        <div className="line-left-to-right"></div>
+        <div className="line-right-to-left"></div>
+      </div>
+    </>
+  );
 };
 
 export default Board;

@@ -8,6 +8,75 @@
   border-radius: 0.5rem;
 }
 
+.lines {
+  width: 300px;
+  height: 300px;
+  background-color: transparent;
+  left: 0.5rem;
+  top: 0.5rem;
+  position: absolute;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.lines > div {
+  background-color: darkgray;
+}
+
+.line-top {
+  width: 100%;
+  height: 5px;
+  transform: translate(0, 45px);
+}
+
+.line-middle {
+  width: 100%;
+  height: 5px;
+  transform: translate(0, 142px);
+}
+
+.line-bottom {
+  position: absolute;
+  width: 85%;
+  height: 5px;
+  transform: translate(18px, 238px);
+}
+
+.line-left {
+  position: absolute;
+  width: 5px;
+  height: 85%;
+  transform: translate(45px, 0px);
+}
+
+.line-center {
+  position: absolute;
+  width: 5px;
+  height: 85%;
+  transform: translate(147px, 0px);
+}
+
+.line-right {
+  position: absolute;
+  width: 5px;
+  height: 85%;
+  transform: translate(250px, 0px);
+}
+
+.line-right-to-left {
+  position: absolute;
+  width: 5px;
+  height: 120%;
+  transform: translate(147px, -55px) rotate(45deg);
+}
+
+.line-left-to-right {
+  position: absolute;
+  width: 5px;
+  height: 120%;
+  transform: translate(147px, -55px) rotate(-45deg);
+}
+
 .board > div {
   display: flex;
   justify-content: center;
