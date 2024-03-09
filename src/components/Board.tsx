@@ -107,14 +107,14 @@ const Board: React.FC<BoardProps> = ({
     <>
       <div className="board">{squares}</div>
       <div className="lines">
-        <div className="line-top"></div>
-        <div className="line-middle"></div>
-        <div className="line-bottom"></div>
-        <div className="line-left"></div>
-        <div className="line-center"></div>
-        <div className="line-right"></div>
-        <div className="line-left-to-right"></div>
-        <div className="line-right-to-left"></div>
+        <div className="line line-top"></div>
+        <div className="line line-middle"></div>
+        <div className="line line-bottom"></div>
+        <div className="line line-left"></div>
+        <div className="line line-center"></div>
+        <div className="line line-right"></div>
+        <div className="line line-left-to-right"></div>
+        <div className="line line-right-to-left"></div>
       </div>
     </>
   );
