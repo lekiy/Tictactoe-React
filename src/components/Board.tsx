@@ -13,6 +13,16 @@ const Board: React.FC<BoardProps> = ({
   handleWin,
 }) => {
   const [gridCells, setGridCells] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [lines, setLines] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
   const squares = [];
 
   const checkForWin = useCallback(
@@ -22,58 +32,74 @@ const Board: React.FC<BoardProps> = ({
         grid[0] === currentPlayer &&
         grid[1] === currentPlayer &&
         grid[2] === currentPlayer
-      )
-        return true; //top
+      ) {
+        setLines(lines.map((value, index) => (index === 0 ? true : value)));
+        return true;
+      } //top
       if (
         grid[3] === currentPlayer &&
         grid[4] === currentPlayer &&
         grid[5] === currentPlayer
-      )
-        return true; //middle
+      ) {
+        setLines(lines.map((value, index) => (index === 1 ? true : value)));
+        return true;
+      } //middle
       if (
         grid[6] === currentPlayer &&
         grid[7] === currentPlayer &&
         grid[8] === currentPlayer
-      )
-        return true; //bottom
+      ) {
+        setLines(lines.map((value, index) => (index === 2 ? true : value)));
+        return true;
+      } //bottom
 
       //vertical
       if (
         grid[0] === currentPlayer &&
         grid[3] === currentPlayer &&
         grid[6] === currentPlayer
-      )
-        return true; //left
+      ) {
+        setLines(lines.map((value, index) => (index === 3 ? true : value)));
+        return true;
+      } //left
       if (
         grid[1] === currentPlayer &&
         grid[4] === currentPlayer &&
         grid[7] === currentPlayer
-      )
-        return true; //middle
+      ) {
+        setLines(lines.map((value, index) => (index === 4 ? true : value)));
+        return true;
+      } //middle
       if (
         grid[2] === currentPlayer &&
         grid[5] === currentPlayer &&
         grid[8] === currentPlayer
-      )
-        return true; //right
+      ) {
+        setLines(lines.map((value, index) => (index === 5 ? true : value)));
+        return true;
+      } //right
 
       //diagnal
       if (
         grid[0] === currentPlayer &&
         grid[4] === currentPlayer &&
         grid[8] === currentPlayer
-      )
-        return true; //left-right
+      ) {
+        setLines(lines.map((value, index) => (index === 6 ? true : value)));
+        return true;
+      } //left-right
       if (
         grid[2] === currentPlayer &&
         grid[4] === currentPlayer &&
         grid[6] === currentPlayer
-      )
-        return true; //right-left
+      ) {
+        setLines(lines.map((value, index) => (index === 7 ? true : value)));
+        return true;
+      } //right-left
 
       return false;
     },
-    []
+    [lines]
   );
 
   const handleUpdateCell = useCallback(
@@ -86,7 +112,6 @@ const Board: React.FC<BoardProps> = ({
         return cell;
       });
       setGridCells(grid);
-      console.log(grid);
       if (checkForWin(player, grid)) handleWin();
     },
     [checkForWin, gridCells, handleWin]
@@ -107,14 +132,14 @@ const Board: React.FC<BoardProps> = ({
     <>
       <div className="board">{squares}</div>
       <div className="lines">
-        <div className="line line-top"></div>
-        <div className="line line-middle"></div>
-        <div className="line line-bottom"></div>
-        <div className="line line-left"></div>
-        <div className="line line-center"></div>
-        <div className="line line-right"></div>
-        <div className="line line-left-to-right"></div>
-        <div className="line line-right-to-left"></div>
+        {lines[0] && <div className="line line-top"></div>}
+        {lines[1] && <div className="line line-middle"></div>}
+        {lines[2] && <div className="line line-bottom"></div>}
+        {lines[3] && <div className="line line-left"></div>}
+        {lines[4] && <div className="line line-center"></div>}
+        {lines[5] && <div className="line line-right"></div>}
+        {lines[6] && <div className="line line-left-to-right"></div>}
+        {lines[7] && <div className="line line-right-to-left"></div>}
       </div>
     </>
   );

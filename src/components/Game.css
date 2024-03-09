@@ -20,6 +20,7 @@
   position: absolute;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  visibility: hidden;
 }
 
 .line {
@@ -30,6 +31,7 @@
   left: 155px;
   top: 8px;
   background-color: black;
+  visibility: visible;
 }
 
 .line-middle {
